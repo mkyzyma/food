@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: food-api
+    env_file: .env-docker
+    build:
+      context: ./
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    networks:
+      - food
+    command: ["poetry", "run", "uvicorn", "api.app:app", "--host=0.0.0.0", "--reload"]
+
+
+  db:
+    image: postgres
+    container_name: food-db
+    volumes:
+      - ../.data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=food
+      - POSTGRES_USER=food
+      - POSTGRES_PASSWORD=food1234
+    networks:
+      - food
+
+networks:
+  food:
+    driver: bridge
