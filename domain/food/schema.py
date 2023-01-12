@@ -7,6 +7,7 @@ class FoodBase(OrmBaseModel):
     description: str | None = None
     is_special: bool = False
     is_vegan: bool = False
+    price: int = 0
 
 
 class FoodCreate(FoodBase):

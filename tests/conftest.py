@@ -34,6 +34,7 @@ def run_around_tests(session: Session):
             is_publish=True,
             is_special=False,
             is_vegan=True,
+            price=100,
         )
     )
     session.add(
@@ -44,6 +45,7 @@ def run_around_tests(session: Session):
             is_publish=True,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
     session.add(
@@ -54,6 +56,7 @@ def run_around_tests(session: Session):
             is_publish=False,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
 
@@ -65,6 +68,7 @@ def run_around_tests(session: Session):
             is_publish=True,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
     session.add(
@@ -75,6 +79,7 @@ def run_around_tests(session: Session):
             is_publish=True,
             is_special=True,
             is_vegan=False,
+            price=100,
         )
     )
     session.add(
@@ -85,6 +90,7 @@ def run_around_tests(session: Session):
             is_publish=False,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
     session.add(
@@ -95,6 +101,7 @@ def run_around_tests(session: Session):
             is_publish=True,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
 
@@ -106,6 +113,7 @@ def run_around_tests(session: Session):
             is_publish=False,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
     session.add(
@@ -116,6 +124,7 @@ def run_around_tests(session: Session):
             is_publish=True,
             is_special=False,
             is_vegan=False,
+            price=100,
         )
     )
 

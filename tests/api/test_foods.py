@@ -6,7 +6,9 @@ client = TestClient(app)
 
 
 def test_create():
-    response = client.post("/foods/", json={"name": "Новый продукт", "id_category": 1})
+    response = client.post(
+        "/foods/", json={"name": "Новый продукт", "id_category": 1, "price": 100}
+    )
 
     assert response.status_code == status.HTTP_201_CREATED
     assert response.json() == {
@@ -15,6 +17,7 @@ def test_create():
         "is_special": False,
         "is_vegan": False,
         "id": 10,
+        "price": 100,
     }
 
 
@@ -31,6 +34,7 @@ def test_update():
         "is_special": False,
         "is_vegan": False,
         "id": 3,
+        "price": 100,
     }
 
 
@@ -48,8 +52,8 @@ def test_get_by_id():
         "description": "Лимонад",
         "is_special": False,
         "is_vegan": True,
-        "id": 1,
         "toppings": ["Киви", "Ананас", "Миндаль"],
+        "price": 100,
     }
 
 
@@ -62,48 +66,48 @@ def test_get():
             "description": "Лимонад",
             "is_special": False,
             "is_vegan": True,
-            "id": 1,
             "toppings": ["Киви", "Ананас", "Миндаль"],
+            "price": 100,
         },
         {
             "name": "Сок",
             "description": "Сок",
             "is_special": False,
             "is_vegan": False,
-            "id": 2,
             "toppings": [],
+            "price": 100,
         },
         {
             "name": "Картошка",
             "description": "Картошка",
             "is_special": False,
             "is_vegan": False,
-            "id": 4,
             "toppings": [],
+            "price": 100,
         },
         {
             "name": "Капуста",
             "description": "Капуста",
             "is_special": True,
             "is_vegan": False,
-            "id": 5,
             "toppings": [],
+            "price": 100,
         },
         {
             "name": "Бла бла бла",
             "description": "Бла бла бла",
             "is_special": False,
             "is_vegan": False,
-            "id": 7,
             "toppings": [],
+            "price": 100,
         },
         {
             "name": "Секрет 2",
             "description": "Секрет 2",
             "is_special": False,
             "is_vegan": False,
-            "id": 9,
             "toppings": [],
+            "price": 100,
         },
     ]
 
@@ -117,8 +121,8 @@ def test_get_vegan():
             "description": "Лимонад",
             "is_special": False,
             "is_vegan": True,
-            "id": 1,
             "toppings": ["Киви", "Ананас", "Миндаль"],
+            "price": 100,
         },
     ]
 
@@ -132,7 +136,7 @@ def test_get_special():
             "description": "Капуста",
             "is_special": True,
             "is_vegan": False,
-            "id": 5,
             "toppings": [],
+            "price": 100,
         },
     ]

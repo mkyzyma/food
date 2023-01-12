@@ -47,32 +47,32 @@ def test_get_by_id():
                 "description": "Картошка",
                 "is_special": False,
                 "is_vegan": False,
-                "id": 4,
                 "toppings": [],
+                "price": 100,
             },
             {
                 "name": "Капуста",
                 "description": "Капуста",
                 "is_special": True,
                 "is_vegan": False,
-                "id": 5,
                 "toppings": [],
+                "price": 100,
             },
             {
                 "name": "Морковка",
                 "description": "Морковка",
                 "is_special": False,
                 "is_vegan": False,
-                "id": 6,
                 "toppings": [],
+                "price": 100,
             },
             {
                 "name": "Бла бла бла",
                 "description": "Бла бла бла",
                 "is_special": False,
                 "is_vegan": False,
-                "id": 7,
                 "toppings": [],
+                "price": 100,
             },
         ],
     }
@@ -91,16 +91,16 @@ def test_get():
                     "description": "Лимонад",
                     "is_special": False,
                     "is_vegan": True,
-                    "id": 1,
                     "toppings": ["Киви", "Ананас", "Миндаль"],
+                    "price": 100,
                 },
                 {
                     "name": "Сок",
                     "description": "Сок",
                     "is_special": False,
                     "is_vegan": False,
-                    "id": 2,
                     "toppings": [],
+                    "price": 100,
                 },
             ],
         },
@@ -109,28 +109,28 @@ def test_get():
             "id": 2,
             "foods": [
                 {
-                    "name": "Бла бла бла",
-                    "description": "Бла бла бла",
+                    "name": "Картошка",
+                    "description": "Картошка",
                     "is_special": False,
                     "is_vegan": False,
-                    "id": 7,
                     "toppings": [],
+                    "price": 100,
                 },
                 {
                     "name": "Капуста",
                     "description": "Капуста",
                     "is_special": True,
                     "is_vegan": False,
-                    "id": 5,
                     "toppings": [],
+                    "price": 100,
                 },
                 {
-                    "name": "Картошка",
-                    "description": "Картошка",
+                    "name": "Бла бла бла",
+                    "description": "Бла бла бла",
                     "is_special": False,
                     "is_vegan": False,
-                    "id": 4,
                     "toppings": [],
+                    "price": 100,
                 },
             ],
         },
@@ -147,11 +147,11 @@ def test_get_vegan():
             "foods": [
                 {
                     "name": "Лимонад",
-                    "id": 1,
                     "description": "Лимонад",
                     "is_special": False,
                     "is_vegan": True,
                     "toppings": ["Киви", "Ананас", "Миндаль"],
+                    "price": 100,
                 },
             ],
         },
@@ -168,11 +168,11 @@ def test_get_special():
             "foods": [
                 {
                     "name": "Капуста",
-                    "id": 5,
                     "description": "Капуста",
                     "is_special": True,
                     "is_vegan": False,
                     "toppings": [],
+                    "price": 100,
                 },
             ],
         },
@@ -182,4 +182,19 @@ def test_get_special():
 def test_get_by_toppings():
     response = client.get("/food-categories/?toppings=Ананас")
     print(response.json())
-    assert response.json() == []
+    assert response.json() == [
+        {
+            "name": "Напитки",
+            "id": 1,
+            "foods": [
+                {
+                    "name": "Лимонад",
+                    "description": "Лимонад",
+                    "is_special": False,
+                    "is_vegan": True,
+                    "toppings": ["Киви", "Ананас", "Миндаль"],
+                    "price": 100,
+                }
+            ],
+        }
+    ]
