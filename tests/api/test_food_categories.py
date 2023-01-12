@@ -15,7 +15,6 @@ def test_create():
     assert response.json() == {
         "id": 4,
         "name": "Новая категория",
-        "is_publish": False,
     }
 
 
@@ -26,7 +25,6 @@ def test_update():
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
         "id": 2,
-        "is_publish": True,
         "name": "Измененная категория",
     }
 
@@ -42,7 +40,6 @@ def test_get_by_id():
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
         "name": "Гарниры",
-        "is_publish": True,
         "id": 2,
         "foods": [
             {
@@ -87,7 +84,6 @@ def test_get():
     assert response.json() == [
         {
             "name": "Напитки",
-            "is_publish": True,
             "id": 1,
             "foods": [
                 {
@@ -110,15 +106,14 @@ def test_get():
         },
         {
             "name": "Гарниры",
-            "is_publish": True,
             "id": 2,
             "foods": [
                 {
-                    "name": "Картошка",
-                    "description": "Картошка",
+                    "name": "Бла бла бла",
+                    "description": "Бла бла бла",
                     "is_special": False,
                     "is_vegan": False,
-                    "id": 4,
+                    "id": 7,
                     "toppings": [],
                 },
                 {
@@ -130,11 +125,11 @@ def test_get():
                     "toppings": [],
                 },
                 {
-                    "name": "Бла бла бла",
-                    "description": "Бла бла бла",
+                    "name": "Картошка",
+                    "description": "Картошка",
                     "is_special": False,
                     "is_vegan": False,
-                    "id": 7,
+                    "id": 4,
                     "toppings": [],
                 },
             ],
@@ -148,7 +143,6 @@ def test_get_vegan():
     assert response.json() == [
         {
             "name": "Напитки",
-            "is_publish": True,
             "id": 1,
             "foods": [
                 {
@@ -170,7 +164,6 @@ def test_get_special():
     assert response.json() == [
         {
             "name": "Гарниры",
-            "is_publish": True,
             "id": 2,
             "foods": [
                 {
@@ -184,3 +177,9 @@ def test_get_special():
             ],
         },
     ]
+
+
+def test_get_by_toppings():
+    response = client.get("/food-categories/?toppings=Ананас")
+    print(response.json())
+    assert response.json() == []

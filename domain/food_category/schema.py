@@ -7,10 +7,10 @@ from domain.base.orm_base_model import OrmBaseModel
 
 class FoodCategoryBase(OrmBaseModel):
     name: str
-    is_publish: bool = False
 
 
 class FoodCategoryCreate(FoodCategoryBase):
+    is_publish: bool = False
     ...
 
 

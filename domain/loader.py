@@ -11,10 +11,10 @@ class Loader(ABC):
     def load(self, session: Session, filter=None):
         statement = self.get_statement(filter)
         statement = self.apply_page_filter(statement, filter)
-        return session.execute(statement).scalars().all()
+        return session.execute(statement).scalars().unique().all()
 
     def apply_page_filter(self, statement: Select, filter=None):
         if not filter or not hasattr(filter, "limit") or filter.limit == 0:
             return statement
 
-        return statement.offset(filter.skip).limit(filter.limit)
+        return statement.offset(filter.skip).unique().limit(filter.limit)

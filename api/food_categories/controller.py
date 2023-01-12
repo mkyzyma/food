@@ -1,6 +1,6 @@
 from typing import List
-from fastapi import Depends, status, APIRouter
-from domain.food.filter import FoodFilter
+from fastapi import Depends, status, APIRouter, Query
+from domain.food_category.filter import FoodCategoryFilter
 from domain.food_category.repository import FoodCategoryRepository
 from domain.food_category.schema import (
     FoodCategoryCreate,
@@ -19,10 +19,16 @@ repo = FoodCategoryRepository()
     response_model=List[FoodCategoryResponseWithFoods],
 )
 def get_food_categories(
-    is_special: bool | None = None, is_vegan: bool | None = None, db=Depends(get_db)
+    is_special: bool | None = None,
+    is_vegan: bool | None = None,
+    toppings: List[str] = Query(None),
+    db=Depends(get_db),
 ):
     categories = repo.load(
-        db, FoodFilter(is_publish=True, is_vegan=is_vegan, is_special=is_special)
+        db,
+        FoodCategoryFilter(
+            is_publish=True, is_vegan=is_vegan, is_special=is_special, toppings=toppings
+        ),
     )
     return categories
 

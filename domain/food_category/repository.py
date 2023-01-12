@@ -1,5 +1,5 @@
 from sqlalchemy.sql import Select
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import selectinload, joinedload
 from domain.entity import FoodCategory, Food
 from domain.repository import Repository
 from sqlalchemy import select
@@ -15,7 +15,7 @@ class FoodCategoryRepository(Repository[FoodCategory]):
 
         if hasattr(filter, "is_publish"):
             stmt = stmt.options(
-                selectinload(
+                joinedload(
                     FoodCategory.foods.and_(Food.is_publish == filter.is_publish)
                 )
             ).where(FoodCategory.is_publish == filter.is_publish)
@@ -25,7 +25,7 @@ class FoodCategoryRepository(Repository[FoodCategory]):
                 stmt.join(FoodCategory.foods)
                 .where(Food.is_vegan == filter.is_vegan)
                 .options(
-                    selectinload(
+                    joinedload(
                         FoodCategory.foods.and_(Food.is_vegan == filter.is_vegan)
                     )
                 )
@@ -36,7 +36,7 @@ class FoodCategoryRepository(Repository[FoodCategory]):
                 stmt.join(FoodCategory.foods)
                 .where(Food.is_special == filter.is_special)
                 .options(
-                    selectinload(
+                    joinedload(
                         FoodCategory.foods.and_(Food.is_special == filter.is_special)
                     )
                 )
